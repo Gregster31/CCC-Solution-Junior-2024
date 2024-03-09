@@ -1,15 +1,14 @@
 def main():
-    # key being the numbers and values being the number of times in inputs
-    list_nums: dict[int, int] = {}
+    num_participants: int = int(input())
 
-    current_num: int = int(input())
-    # Add the num to the dict
-    list_nums += {current_num, 1}
+    scores = []
+    for _ in range(num_participants):
+        score: int = int(input())
+        scores.append(score)
+    scores.sort()
 
-    while current_num:
-        if list_nums.__contains__(current_num):
-
-
+    third_place: int = scores[-3]
+    print(f"{third_place} {scores.count(third_place)}")
 
 
 if __name__ == "__main__":
