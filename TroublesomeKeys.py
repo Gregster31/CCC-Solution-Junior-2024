@@ -3,45 +3,33 @@ from typing import Optional
 
 
 def main():
-    silence: str = ""
-    absurde: str = ""
-    replace: str = ""
-    overcooked: int = 0
+    # Get inputs
+    keys_pressed = input().strip()
+    letters_displayed = input().strip()
 
-    frapper = "forloops"
-    afficher = "frlpz"
+    silly_key = None
+    quiet_key = None
+    wrong_letter = None
+    for key, letter in zip(keys_pressed, letters_displayed):
+        if key != letter:
+            silly_key = key
+            wrong_letter = letter
+            break
 
-    # No silence touch
-    if len(frapper) == len(afficher):
-        silence = "-"
-        for i in range(len(frapper)):
-            if frapper[i] != afficher[i]:
-                absurde = frapper[i]
-                replace = afficher[i]
-                break
-    else:
-        silent = find_silent(frapper, silence)
+    # If there's no quiet key, return '-'
+    if silly_key is None:
+        print(f"{silly_key} {wrong_letter}\n-")
 
-        # Delete all silent in frapper
-        for j in range(len(frapper)):
-            if frapper[j] == silent:
-                frapper[j] = ""
+    # Find the quiet key
+    for i in range(len(keys_pressed) - 1):
+        if keys_pressed[i] == silly_key and keys_pressed[i + 1] != quiet_key:
+            quiet_key = keys_pressed[i + 1]
+            break
 
-        # check which are not the same letters
-        for a in range(len(frapper)):
-            if frapper[a] != afficher[a]:
-                absurde = frapper[a]
-                replace = afficher[a]
-    print(f"{absurde} {replace}\n{silence}")
+    if quiet_key is None:
+        quiet_key = '-'
 
-
-def find_silent(frapper, afficher) -> str:
-    for i in range(len(frapper) - 1):
-        if frapper[i] == afficher[i]:
-            continue
-        else:
-            if frapper[i + 1] == afficher[i]:
-                return frapper[i]
+    print(f"{silly_key} {wrong_letter}\n{quiet_key}")
 
 
 if __name__ == "__main__":
